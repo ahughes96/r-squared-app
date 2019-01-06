@@ -1,0 +1,57 @@
+%h1 Users
+
+%table#users
+  %thead
+    %tr
+      %th User Name
+      %th User Email
+      %th User Type
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.name
+        %td= user.email
+        %td= user.usertype
+
+%h1 Rooms
+
+%table#rooms
+  %thead
+    %tr
+      %th Room Name
+      %th Type
+      %th Description
+      %th Occupied
+      %th Booker
+      %th Operating hours - start_hr
+      %th Operating hours - end_hr
+  %tbody
+    - @rooms.each do |room|
+      %tr
+        %td= room.name
+        %td= room.roomtype
+        %td= room.description
+        %td= room.occupied
+        %td= room.booker
+        %td= room.operate_start.strftime("%k:%M")
+        %td= room.operate_end.strftime("%k:%M")
+
+
+%h1 Recent Bookings
+
+%table#bookings
+  %thead
+    %tr
+      %th Room
+      %th Booker
+      %th Reason
+      %th startAt
+      %th endAt
+  %tbody
+    - @bookings.each do |booking|
+      %tr
+        %td= Room.find(booking.room_id).name
+        %td= User.find(booking.booker_id).name
+        %td= booking.reason
+        %td= booking.time_start.strftime("%b %d %Y, %-l.%M%P")
+        %td= booking.time_end.strftime("%b %d %Y, %-l.%M%P")
